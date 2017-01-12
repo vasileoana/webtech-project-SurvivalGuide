@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+                <th></th>
+                <th>Name</th>
+                <th>Description</th>
+            </thead>
+            <tr ng-repeat="d in Dangers" >
+                <td><img src="{{d.url}}" width="40px" heigth="50px"></img>
+                </td>
+                <td style="margin-right:0"><a ui-sref="Danger({'id': d.id})">{{d.name}}</a> </td>
+                <td style="margin-left:0">{{d.description}} </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

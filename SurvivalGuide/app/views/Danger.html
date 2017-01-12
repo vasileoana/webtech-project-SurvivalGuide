@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+</head>
+
+<body>
+    <h2>
+        <center> {{Danger.name}} <img src="{{Danger.url}}" width="40px" heigth="50px"></h2>
+    </center>
+    <br/>
+    <h3>{{Danger.description}} </h3>
+
+    <form name="addForm" action="#" class="controls">
+
+        <h4>Add skill to this danger:</h4>
+        <label for="skillname">Name:</label>
+        <input type="text" id="skillInput" name="skillname" ng-model="selectSkill.name" required minlength="3" valid-skill> <br/>
+        <label for="skillinstruction">Instruction:</label>
+        <input type="text" id="skillInputInstr" ng-value="{{selectSkill}}" name="skillname" ng-model="selectSkill.instruction" required minlength="3" /> <br/>
+        <br/>Or select one:
+        <select ng-model="selectSkill" ng-options="skillBD.name for skillBD in skills"></select> <br/>
+
+        <div ng-messages="addForm.$error">
+            <div ng-message="minlength">
+                All content must have at least 3 characters
+            </div>
+        </div>
+        
+        <div ng-messages="addForm.$error">
+            <div ng-message="validSkill">
+                The skill name must start with UPPERCASE
+            </div>
+        </div>
+        
+        <input type="button" class="btn btn-info" value="Add" ng-click="addSkill(selectSkill)" />
+
+    </form>
+
+    <table id="tableD" class="table">
+        <tr>
+            <th>Skills </th>
+            <th>Instruction</th>
+        </tr>
+        <tr ng-repeat="situation in situations" ng-include="getTemplate(situation)">
+
+        </tr>
+    </table>
+
+    <script type="text/ng-template" id="display">
+        <td>{{situation.Skill.name}}</td>
+        <td>{{situation.Skill.instruction}}</td>
+        <td><input type="button" class="btn btn-danger" value="Delete" ng-click="deleteSituation(situation)" /></td>
+        <td><input type="button" class="btn btn-warning" value="Edit" ng-click="editSituation(situation)" /></td>
+    </script>
+
+    <script type="text/ng-template" id="edit">
+        <td><input type="text" ng-model="situation.Skill.name" /></td>
+        <td><input type="text" ng-model="situation.Skill.instruction" /></td>
+        <td><input type="button" value="Cancel" class="btn btn-primary" ng-click="cancelEditing()" /></td>
+        <td><input type="button" value="Save" class="btn btn-success" ng-click="saveSituation(situation)" /></td>
+        <td>Careful! You will change the skill information! Please don't change just for this danger the skill name or description</td>
+    </script>
+
+</body>
+
+</html>
